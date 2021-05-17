@@ -36,6 +36,8 @@ const AppRouter: React.FC = (props) => {
             <PrivateRoute path={"/checkout"} component={Checkout} />
             <PrivateRoute path={"/address"} component={address} />
             <PrivateRoute path={"/myorders"} component={myorders} />
+            <PrivateRoute path={"/myorders"} component={myorders} />
+
 
             {/* 404 Route */}
             <Route component={ErrorPage} />

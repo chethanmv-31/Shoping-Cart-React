@@ -90,3 +90,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 export default connect(mapStoreToProps, mapDispatchToProps)(ProductList);
+
+
+
+

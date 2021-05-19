@@ -127,7 +127,8 @@ class ProductList extends React.PureComponent<Props, State> {
       <>
         <div className="w-100 mt-5 ">
           <Row>
-            <Column size={4} classes={"offset-md-2 text-center"}>
+            
+            <Column size={3} classes={" text-center  m-4 mt-0"}>
               <AirbnbSlider
                 ThumbComponent={AirbnbThumbComponent}
                 getAriaLabel={(index: any) =>
@@ -143,7 +144,7 @@ class ProductList extends React.PureComponent<Props, State> {
                 {this.state.value[0]}-{this.state.value[1]}
               </h5>
             </Column>
-            <Column size={4} classes={"offset-md-1"}>
+            <Column size={2} classes={"float-end m-4 mt-0"}>
               <select
                 name="sort"
                 id="sort"
@@ -160,6 +161,7 @@ class ProductList extends React.PureComponent<Props, State> {
                 <option value="NameHighToLow">Z-to-A</option>
               </select>
             </Column>
+            
           </Row>
         </div>
         <LoadingWrapper>

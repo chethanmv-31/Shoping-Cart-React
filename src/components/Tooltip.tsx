@@ -4,6 +4,7 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
+import "../index"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,14 +33,14 @@ ValueLabelComponent.propTypes = {
 
 const AirbnbSlider = withStyles({
   root: {
-    color: "#3a8589",
+    color: "#pink",
     height: 3,
     padding: "13px 0",
   },
   thumb: {
     height: 27,
     width: 27,
-    backgroundColor: "#fff",
+    backgroundColor: "lightblue",
     border: "1px solid currentColor",
     marginTop: -12,
     marginLeft: -13,
@@ -48,7 +49,6 @@ const AirbnbSlider = withStyles({
       boxShadow: "#ccc 0 2px 3px 1px",
     },
     "& .bar": {
-      // display: inline-block !important;
       height: 9,
       width: 1,
       backgroundColor: "currentColor",
@@ -69,7 +69,7 @@ const AirbnbSlider = withStyles({
 
 function AirbnbThumbComponent(props: any) {
   return (
-    <span {...props}>
+    <span {...props} >
       <span className="bar" />
       <span className="bar" />
       <span className="bar" />

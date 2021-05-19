@@ -12,4 +12,15 @@ const createOrder = (amount: number, productId: number) => {
     )
   );
 };
-export default { createOrder };
+
+const createPayment = (paymentAmount:any, paymentMode:any) => {
+  const url = `${constants.BASE_URL}/order`;
+  return StorageService.getData("token").then((token) =>
+    axios.post(
+      url,
+      { paymentAmount,paymentMode },
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+  );
+};
+export default { createOrder, createPayment };

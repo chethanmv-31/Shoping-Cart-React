@@ -45,6 +45,14 @@ const addressPost = (line1: string, line2: string, city: string, state: string, 
   );
 };
 
+const fileUpload = (profileImage:any) => {
+  const url = `${constants.BASE_URL}/auth/fileupload`;
+  return StorageService.getData("token").then((token) =>
+  axios.post(url, { profileImage }, {
+    headers: { Authorization: `Bearer ${token}`, },
+  })
+);
+};
 
 
-export default { login, profile, register, address, addressPost};
+export default { login, profile, register, address, addressPost,fileUpload};

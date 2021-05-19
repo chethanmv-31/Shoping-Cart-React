@@ -60,14 +60,14 @@ class Profile extends React.Component<Props, State> {
               User Details
             </div>
             <div className="flex ">
-              <div className="imgfallback ">
-                <ImageWithFallback
-                  source="https://www.pinclipart.com/picdir/middle/355-3553881_stockvader-predicted-adig-user-profile-icon-png-clipart.png"
-                  classes="card-img-top img-responsive "
-                />
-                
-                  
-              </div>
+             <NavLink to={"/fileUpload"}>
+              
+                  <ImageWithFallback
+                    source="https://static.thenounproject.com/png/625182-200.png"
+                    classes="card-img-top img-responsive upload-file"
+                  />
+          
+              </NavLink>
               <div>
                 <ul className="list-group list-group-flush fs-5 align-items-start">
                   <li className="list-group-item text-danger ">

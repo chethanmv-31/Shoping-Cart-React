@@ -13,7 +13,9 @@ import Register from "./containers/Register";
 import address from "./containers/address";
 import Payment from "./containers/Payment";
 import Home from "./components/Home";
-import final from "./containers/final";
+import final from "./containers/finalPayment";
+import fileUpload from "./containers/fileUpload";
+import Confirmation from "./containers/Confirmation";
 
 const LazyProfile = React.lazy(() => import("./containers/Profile"));
 
@@ -33,6 +35,8 @@ const AppRouter: React.FC = (props) => {
             <Route path={"/register"} component={Register}></Route>
             <Route path={"/address"} component={address} ></Route>
             <Route path={"/final"} component={final} ></Route>
+            <Route path={"/confirmation"} component={Confirmation} ></Route>
+            <Route path={"/fileUpload"} component={fileUpload} ></Route>
 
             {/* 404 Route */}
             <Route component={ErrorPage} />

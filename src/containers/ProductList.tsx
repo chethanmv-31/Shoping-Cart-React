@@ -130,7 +130,7 @@ class ProductList extends React.PureComponent<Props, State> {
             <Column size={4} classes={"offset-md-2 text-center"}>
               <AirbnbSlider
                 ThumbComponent={AirbnbThumbComponent}
-                getAriaLabel={(index:any) =>
+                getAriaLabel={(index: any) =>
                   index === 0 ? "Minimum price" : "Maximum price"
                 }
                 defaultValue={[20, 40]}
@@ -152,12 +152,12 @@ class ProductList extends React.PureComponent<Props, State> {
                 aria-label="Default select example"
               >
                 <option value="" selected>
-                  SORT 
+                  SORT
                 </option>
-                <option value="PriceLowToHigh">Price Low High</option>
-                <option value="PriceHighToLow">Price High Low</option>
-                <option value="NameLowToHigh">Name Low High</option>
-                <option value="NameHighToLow">Name High  Low</option>
+                <option value="PriceLowToHigh">Low-to-High</option>
+                <option value="PriceHighToLow">High-to-Low</option>
+                <option value="NameLowToHigh">A-to-Z</option>
+                <option value="NameHighToLow">Z-to-A</option>
               </select>
             </Column>
           </Row>
@@ -166,7 +166,7 @@ class ProductList extends React.PureComponent<Props, State> {
           <Row>
             {this.state.plist.map((val) =>
               JSON.parse(val.productSalePrice) > this.state.value[0] &&
-              JSON.parse(val.productSalePrice) < this.state.value[1] ? (
+                JSON.parse(val.productSalePrice) < this.state.value[1] ? (
                 <Column size={3} classes={"my-3"} key={val.productId}>
                   <Product
                     btnClick={() => this.addToCart(val)}

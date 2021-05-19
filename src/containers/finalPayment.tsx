@@ -10,55 +10,45 @@ import LoadingActions from "../store/actions/LoadingActions";
 import formatter from "../utils/formatter";
 import { StoreType } from "../types";
 import Container from "../components/Container";
+import OrderService from "../services/OrderService";
+import { NavLink } from "react-router-dom";
 
-type RegisterProps = {
-  addressError: (error: string) => void;
+type paymentProps = {
+  paymentError: (error: string) => void;
   errorMessage: string | null;
   showLoader: () => void;
   hideLoader: () => void;
 } & RouteComponentProps;
-type RegisterState = {
-  line1: string;
-  line2: string;
-  city: string;
-  state: string;
-  pincode: any;
+type paymentState = {
+  paymentAmount:any;
+  paymentMode:any;
   redirect: boolean;
 };
-class Add extends React.Component<RegisterProps> {
-  state: RegisterState = {
-    line1: "",
-    line2: "",
-    city: "",
-    state: "",
-    pincode: "",
+class payment extends React.Component<paymentProps> {
+  state: paymentState = {
+    paymentAmount:"",
+    paymentMode:"",
     redirect: false,
   };
   submitData = async (e: SyntheticEvent) => {
     try {
       e.preventDefault();
-      const { line1, line2, city, state, pincode } = this.state;
-      const { data } = await UserService.addressPost(
-        line1,
-        line2,
-        city,
-        state,
-        pincode
+      const { paymentAmount, paymentMode } = this.state;
+      const { data } = await OrderService.createPayment(
+       paymentAmount,
+       paymentMode
       );
-      console.log("address", data);
+      console.log("payment", data);
       this.props.showLoader();
       this.props.hideLoader();
-      this.props.history.push("/profile");
+      this.props.history.push("/confirmation");
       this.setState({
         redirect: true,
-        line1: this.state.line1,
-        line2: this.state.line2,
-        city: this.state.city,
-        state: this.state.state,
-        pincode: this.state.pincode,
+        paymentAmount: this.state.paymentAmount,
+        paymentMode: this.state.paymentMode
       });
     } catch (e) {
-      this.props.addressError(formatter.titlecase(e.message.toString()));
+      this.props.paymentError(formatter.titlecase(e.message.toString()));
       this.props.hideLoader();
       console.log(e);
     }
@@ -66,7 +56,7 @@ class Add extends React.Component<RegisterProps> {
   render() {
     const redirecting = () => {
       if (this.state.redirect === true) {
-        return <Redirect to="/profile" />;
+        return <Redirect to="/confirmation" />;
       }
     };
     console.log("state data", this.state);
@@ -75,40 +65,29 @@ class Add extends React.Component<RegisterProps> {
         <Row>
           <Column size={12}>
             <div className="card col-md-6 mx-auto">
-              <h1 className="text-center">Add Address</h1>
+              <h1 className="text-center">Payment</h1>
               <small className="text-danger">{this.props.errorMessage}</small>
               <div className="card-body">
                 <form onSubmit={this.submitData}>
                   
-                  <TextBox
-                    placeholder={"Address1"}
-                    type={"text"}
-                    textChange={(line1) => this.setState({ line1 })}
-                  />
-                  <TextBox
-                    placeholder={"Address2"}
-                    type={"text"}
-                    textChange={(line2) => this.setState({ line2 })}
-                  />
-                  <TextBox
-                    placeholder={"city"}
-                    type={"text"}
-                    textChange={(city) => this.setState({ city })}
-                  />
-                  <TextBox
-                    placeholder={"State"}
-                    type={"text"}
-                    textChange={(state) => this.setState({ state })}
-                  />
-                  <TextBox
-                    placeholder={"Pincode"}
-                    type={"text"}
-                    textChange={(pincode) => this.setState({ pincode })}
-                  />
+                  <select className="form-select" aria-label="Default select example"  onChange={(paymentMode) => this.setState({ paymentMode })}>
+                    <option selected>Select The Payment Option</option>
+                    <option value="1">Card</option>
+                    <option value="2">Cash On Delivery</option>
+                    <option value="3">UPI</option>
+                  </select>
 
-                  <button className={"btn btn-dark w-100 text-uppercase"}>
-                    Add
+                  <TextBox
+                    placeholder={"Total Amount"}
+                    type={"text"}
+                    textChange={(paymentAmount) => this.setState({ paymentAmount })}
+                  />
+                 
+                <NavLink to={"/confirmation"}>
+                <button className={"btn btn-dark w-100 text-uppercase"}>
+                    Proceed Payment
                   </button>
+                </NavLink>
                 </form>
               </div>
             </div>
@@ -130,4 +109,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     showLoader: () => dispatch(LoadingActions.showLoader()),
   };
 };
-export default connect(mapStoreDataToProps, mapDispatchToProps)(Add);
+export default connect(mapStoreDataToProps, mapDispatchToProps)(payment);

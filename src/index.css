@@ -94,3 +94,13 @@ main {
 .flex-box {
     display: flex;
 }
+
+
+/* file upload */
+
+.imgfallback {
+    cursor: pointer;
+}
+
+
+/* avatar image */
